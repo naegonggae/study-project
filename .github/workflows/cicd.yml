@@ -61,41 +61,42 @@ jobs:
         if: contains(github.ref, 'main')
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/study-project .
-          docker push ${{ secrets.DOCKER_REPO }}/study-project
+          docker build -f Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }} .
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
       ## 위치 잘못된거 아닌가
 
       ## deploy to production
-      - name: Deploy to prod
-        uses: appleboy/ssh-action@master
-        id: deploy-prod
-        if: contains(github.ref, 'main')
-        with:
-          host: ${{ secrets.HOST_PROD }}
-          username: ec2-user
-          key: ${{ secrets.PRIVATE_KEY }}
-          envs: GITHUB_SHA
-          script: |
-            sudo docker rm -f $(docker ps -qa)
-            sudo docker pull ${{ secrets.DOCKER_REPO }}/dotoriham-prod
-            docker-compose up -d
-            docker image prune -f
+#      - name: Deploy to prod
+#        uses: appleboy/ssh-action@master
+#        id: deploy-prod
+#        if: contains(github.ref, 'main')
+#        with:
+#          host: ${{ secrets.HOST_PROD }}
+#          username: ec2-user
+#          key: ${{ secrets.PRIVATE_KEY }}
+#          envs: GITHUB_SHA
+#          script: |
+#            sudo docker rm -f $(docker ps -qa)
+#            sudo docker pull ${{ secrets.DOCKER_REPO }}/dotoriham-prod
+#            docker-compose up -d
+#            docker image prune -f
 
       ## deploy to develop
       - name: Deploy to main
         uses: appleboy/ssh-action@master
         id: deploy-dev
-        if: contains(github.ref, 'develop')
+#        if: contains(github.ref, 'develop')
         with:
           host: ${{ secrets.HOST_DEV }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: 22
+          key: ${{secrets.EC2_KEY}}
+#          username: ${{ secrets.USERNAME }}
+#          password: ${{ secrets.PASSWORD }}
+#          port: 22
           #무슨 아이디 비번이지
           #key: ${{ secrets.PRIVATE_KEY }}
           script: |
             sudo docker rm -f $(docker ps -qa)
-            sudo docker pull ${{ secrets.DOCKER_REPO }}/study-project
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
 #            docker-compose up -d
             docker run -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
             docker image prune -f
