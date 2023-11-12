@@ -14,14 +14,14 @@ public class CiCdController {
 
 	@GetMapping("/test")
 	public String test() {
-		return "test6";
+		return "success1";
 	}
 
 	@GetMapping("/test2")
 	public String test2() {
 		User user = new User("user1");
 		userRepository.save(user);
-		return "docker run 할 때 환경변수 안줬는데 DB에 저장된다고?";
+		return "success2";
 	}
 
 }
