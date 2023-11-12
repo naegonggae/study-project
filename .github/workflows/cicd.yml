@@ -52,6 +52,9 @@ jobs:
 #          echo "${{ secrets.FIREBASE_KEY }}" > ./firebase-service-key.json
 #        shell: bash
 
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
       ## gradle build
       - name: Build with Gradle
         run: |
