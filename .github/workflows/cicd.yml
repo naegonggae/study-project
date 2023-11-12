@@ -15,11 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-#      ## jdk setting
-#      - uses: actions/checkout@v3
-#      - name: Set up JDK 17
-#        uses: actions/setup-java@v3
-#        with:
+      ## jdk setting
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+#          cache: 'gradle'
 #          java-version: '17'
 #          distribution: 'temurin' # https://github.com/actions/setup-java
 
@@ -34,14 +37,14 @@ jobs:
 #          restore-keys: |
 #            ${{ runner.os }}-gradle-
 
-      ## create application-dev.properties
-#      - name: make application.yml
-#        if: contains(github.ref, 'main')
-#        run: |
-#          cd ./src/main/resources
-#          touch ./application.yml
-#          echo "${{ secrets.PROPERTIES_YML }}" > ./application.yml
-#        shell: bash
+      # create application-dev.properties
+      - name: make application.yml
+        if: contains(github.ref, 'main')
+        run: |
+          cd ./src/main/resources
+          touch ./application.yml
+          echo "${{ secrets.PROPERTIES_YML }}" > ./application.yml
+        shell: bash
 
       ## create firebase-key.json
 #      - name: create firebase key
@@ -54,18 +57,6 @@ jobs:
 
 #      - name: Grant execute permission for gradlew
 #        run: chmod +x gradlew
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1
-
-      - name: Set up JDK17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-          cache: 'gradle'
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
 
       ## gradle build
       - name: Build with Gradle
