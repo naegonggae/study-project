@@ -15,13 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      ## jdk setting
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin' # https://github.com/actions/setup-java
+#      ## jdk setting
+#      - uses: actions/checkout@v3
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: '17'
+#          distribution: 'temurin' # https://github.com/actions/setup-java
 
       ## gradle caching
 #      - name: Gradle Caching
