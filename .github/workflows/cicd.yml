@@ -58,8 +58,8 @@ jobs:
       ## gradle build
       - name: Build with Gradle
         run: |
-#          ./gradlew wrapper --gradle-version=8.4
-          ./gradlew clean build -x test -Pprofile=studyProject
+          ./gradlew wrapper --gradle-version=8.4
+          ./gradlew build -x test -Pprofile=studyProject
 
       ## docker build & push to production
       - name: Docker build & push to prod
