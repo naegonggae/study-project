@@ -82,25 +82,25 @@ jobs:
 #            docker image prune -f
 
       ## deploy to develop
-      - name: Deploy to main
-        uses: appleboy/ssh-action@master
-        id: deploy-dev
-#        if: contains(github.ref, 'develop')
-        with:
-          username: ubuntu
-          host: ${{ secrets.HOST_DEV }}
-          key: ${{secrets.EC2_KEY}}
-#          username: ${{ secrets.USERNAME }}
-#          password: ${{ secrets.PASSWORD }}
-#          port: 22
-          #무슨 아이디 비번이지
-          #key: ${{ secrets.PRIVATE_KEY }}
-          script: |
-            sudo docker rm -f $(docker ps -qa)
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
-#            docker-compose up -d
-            docker run -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
-            docker image prune -f
+#      - name: Deploy to main
+#        uses: appleboy/ssh-action@master
+#        id: deploy-dev
+##        if: contains(github.ref, 'develop')
+#        with:
+#          username: ubuntu
+#          host: ${{ secrets.HOST_DEV }}
+#          key: ${{secrets.EC2_KEY}}
+##          username: ${{ secrets.USERNAME }}
+##          password: ${{ secrets.PASSWORD }}
+##          port: 22
+#          #무슨 아이디 비번이지
+#          #key: ${{ secrets.PRIVATE_KEY }}
+#          script: |
+#            sudo docker rm -f $(docker ps -qa)
+#            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
+##            docker-compose up -d
+#            docker run -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
+#            docker image prune -f
 
 #  ## time
 #  current-time:
