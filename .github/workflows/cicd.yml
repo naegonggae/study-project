@@ -58,7 +58,6 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           script: |
-            echo DATABASE_URL=${{ secrets.EC2_HOST }} >> .env
             sudo docker rm -f ${{ secrets.DOCKER_REPO }}
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
             sudo docker run -d -p 8080:8080 --name ${{ secrets.DOCKER_REPO }} -e SPRING_DATASOURCE_URL=jdbc:mysql://${{ secrets.EC2_HOST }}:${{ secrets.DB_PORT }}/${{ secrets.DB_NAME }} -e SPRING_DATASOURCE_PASSWORD=${{ secrets.DB_PASSWORD }} ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
