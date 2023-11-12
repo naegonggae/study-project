@@ -53,7 +53,7 @@ jobs:
       - name: Configure Application YML
         run: |
           sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/main/resources/application.yml
-          sed -i "s|${{ secrets.DB_USERNAME }}|${DB_USERNAME}|g" src/main/resources/application.yml
+#          sed -i "s|${{ secrets.DB_USERNAME }}|${DB_USERNAME}|g" src/main/resources/application.yml
           sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/main/resources/application.yml
 
       ## gradle build

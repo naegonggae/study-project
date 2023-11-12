@@ -7,7 +7,7 @@ spring:
     #    password:
     #    driver-class-name: org.h2.Driver
     url: ${DB_URL}
-    username: ${DB_USERNAME}
+    username: root
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
