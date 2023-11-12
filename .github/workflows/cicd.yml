@@ -35,13 +35,13 @@ jobs:
 #            ${{ runner.os }}-gradle-
 
       ## create application-dev.properties
-      - name: make application.yml
-        if: contains(github.ref, 'main')
-        run: |
-          cd ./src/main/resources
-          touch ./application.yml
-          echo "${{ secrets.PROPERTIES_YML }}" > ./application.yml
-        shell: bash
+#      - name: make application.yml
+#        if: contains(github.ref, 'main')
+#        run: |
+#          cd ./src/main/resources
+#          touch ./application.yml
+#          echo "${{ secrets.PROPERTIES_YML }}" > ./application.yml
+#        shell: bash
 
       ## create firebase-key.json
 #      - name: create firebase key
