@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class User {
 
 	@Id @GeneratedValue
