@@ -73,7 +73,7 @@ jobs:
       ## deploy to develop
       - name: Deploy to main
         uses: appleboy/ssh-action@master
-        id: deploy-dev
+#        id: deploy-dev
 #        if: contains(github.ref, 'develop')
         with:
           username: ubuntu
@@ -88,5 +88,5 @@ jobs:
             sudo docker rm -f $(docker ps -qa)
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
 #            docker-compose up -d
-            docker run -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
-            docker image prune -f
+            sudo docker run -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
+            sudo docker image prune -f
