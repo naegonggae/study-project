@@ -31,24 +31,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      # create application.yml
-#      - name: make application.yml
-#        run: |
-#          cd ./src/main/resources
-#          touch ./application.yml
-#          echo "${{ secrets.PROPERTIES_YML }}" > ./application.yml
-#        shell: bash
-
-#      - name: Set up Application Secrets
-#        run: |
-#          echo "DB_URL=${{ secrets.DB_URL }}" >> $GITHUB_ENV
-#          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> $GITHUB_ENV
-#          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
-
-#      - name: Build Application
-#        run: |
-#          ./gradlew build
-
       # Replace placeholders in application.yml with secrets
       - name: Configure Application YML
         run: |
