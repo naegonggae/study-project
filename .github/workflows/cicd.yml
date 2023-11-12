@@ -87,6 +87,7 @@ jobs:
         id: deploy-dev
 #        if: contains(github.ref, 'develop')
         with:
+          username: ubuntu
           host: ${{ secrets.HOST_DEV }}
           key: ${{secrets.EC2_KEY}}
 #          username: ${{ secrets.USERNAME }}
