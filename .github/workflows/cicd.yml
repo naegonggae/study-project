@@ -25,8 +25,22 @@ jobs:
         run: ./gradlew clean build -x test
 
       ## docker build & push
-      - name: Docker build & push to prod
+      - name: Docker build & push
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -f Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }} .
           docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
+
+      ## deploy to main
+      - name: Deploy to main
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DEV }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+                    sudo docker rm -f $(docker ps -qa)
+                    sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
+          #            docker-compose up -d
+                    sudo docker run -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
+                    sudo docker image prune -f
