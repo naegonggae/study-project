@@ -78,7 +78,7 @@ jobs:
         with:
           username: ubuntu
           host: ${{ secrets.HOST_DEV }}
-          key: ${{secrets.EC2_KEY}}
+          key: ${{ secrets.EC2_KEY }}
 #          username: ${{ secrets.USERNAME }}
 #          password: ${{ secrets.PASSWORD }}
 #          port: 22
