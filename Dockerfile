@@ -1,29 +1,9 @@
-FROM gradle:8.4-jdk17-alpine as builder
-WORKDIR /build
-
-# 그래들 파일이 변경되었을 때만 새롭게 의존패키지 다운로드 받게함.
-COPY build.gradle settings.gradle /build/
-RUN gradle build -x test --parallel --continue > /dev/null 2>&1 || true
-
-# 빌더 이미지에서 애플리케이션 빌드
-COPY . /build
-RUN gradle build -x test --parallel
-
-# APP
-FROM openjdk:17.0-slim
-WORKDIR /app
-
-# 빌더 이미지에서 jar 파일만 복사
-COPY --from=builder /build/build/libs/*-SNAPSHOT.jar ./app.jar
-
-EXPOSE 8080
-
-# root 대신 nobody 권한으로 실행
-USER nobody
-ENTRYPOINT [                                                \
-    "java",                                                 \
-    "-jar",                                                 \
-    "-Djava.security.egd=file:/dev/./urandom",              \
-    "-Dsun.net.inetaddr.ttl=0",                             \
-    "app.jar"              \
-]
+FROM openjdk:17-jdk-alpine
+#FROM azul/zulu-openjdk:17
+# FROM amazoncorretto:11 ==> amazon corretto 11 사용할 경우
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+# ENTRYPOINT ["java","-jar","-Dspring.profiles.active=prod","/app.jar"]
+# => 설정파일을 분리해서 사용할 때
+# java -jar -Dspring.profiles.active=prod app.jar
