@@ -14,7 +14,7 @@ public class CiCdController {
 
 	@GetMapping("/test")
 	public String test() {
-		return "test4";
+		return "test5";
 	}
 
 	@GetMapping("/test2")
