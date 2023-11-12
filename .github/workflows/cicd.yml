@@ -46,7 +46,7 @@ jobs:
       - name: Deploy to main
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST_DEV }}
+          host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           script: |
