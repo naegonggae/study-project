@@ -19,3 +19,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin' # https://github.com/actions/setup-java
+
+      ## gradle build
+      - name: Build with Gradle
+        run: |
+#          ./gradlew wrapper --gradle-version=8.4
+          ./gradlew clean build -x test
