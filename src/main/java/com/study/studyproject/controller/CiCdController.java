@@ -20,7 +20,7 @@ public class CiCdController {
 	@GetMapping("/test2")
 	public String test2() {
 		User user = new User("user1");
-		userRepository.save(user.getId());
+		userRepository.save(user);
 		return "docker run 할 때 환경변수 안줬는데 DB에 저장된다고?";
 	}
 
