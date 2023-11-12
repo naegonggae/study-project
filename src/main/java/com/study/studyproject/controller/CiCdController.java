@@ -8,7 +8,7 @@ public class CiCdController {
 
 	@GetMapping("/test")
 	public String test() {
-		return "test1";
+		return "test2";
 	}
 
 }
