@@ -67,22 +67,20 @@ jobs:
       # Replace placeholders in application.yml with secrets
       - name: Configure Application YML
         run: |
-          sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/main/resources/application.yml
-          sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/main/resources/application.yml
+          sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/test/resources/application.yml
+          sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/test/resources/application.yml
 
-      - name: Setup MySQL
-        uses: samin/mysql-action@v1
-        with:
-          character set server: 'utf8'
-          mysql database: study-db
-          mysql user: root
-          mysql password: ${{ secrets.DB_PASSWORD }}
+#      - name: Setup MySQL
+#        uses: samin/mysql-action@v1
+#        with:
+#          character set server: 'utf8'
+#          mysql database: study-db
+#          mysql user: root
+#          mysql password: ${{ secrets.DB_PASSWORD }}
 
       ## test
       - name: Test
-        run: |
-          ./gradlew wrapper --gradle-version=8.4
-          ./gradlew test
+        run: ./gradlew test
 
 
   deploy:
