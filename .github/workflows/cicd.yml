@@ -84,6 +84,10 @@ jobs:
           sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/main/resources/application.yml
           sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/main/resources/application.yml
 
+      ## gradle build
+      - name: Build with Gradle
+        run: ./gradlew clean build -x test
+
       ## docker build & push
       - name: Docker build & push
         run: |
