@@ -31,18 +31,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      # create application.yml
-      - name: make application.yml
-        run: |
-          cd ./src/main/resources
-          touch ./application.yml
-          echo "${{ secrets.PROPERTIES_YML }}" > ./application.yml
-        shell: bash
       # Replace placeholders in application.yml with secrets
-#      - name: Configure Application YML
-#        run: |
-#          sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/main/resources/application.yml
-#          sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/main/resources/application.yml
+      - name: Configure Application YML
+        run: |
+          sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/main/resources/application.yml
+          sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/main/resources/application.yml
 
       ## gradle build
       - name: Build with Gradle
