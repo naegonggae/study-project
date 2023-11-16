@@ -70,6 +70,14 @@ jobs:
           sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/main/resources/application.yml
           sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/main/resources/application.yml
 
+      - name: Setup MySQL
+        uses: samin/mysql-action@v1
+        with:
+          character set server: 'utf8'
+          mysql database: study-db
+          mysql user: root
+          mysql password: ${{ secrets.DB_PASSWORD }}
+
       ## test
       - name: Test
         run: |
