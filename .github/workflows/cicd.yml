@@ -8,7 +8,7 @@ on:
       - main
 
 jobs:
-  setting & build:
+  build:
     runs-on: ubuntu-latest
     steps:
 
@@ -43,7 +43,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: setting & build
+    needs: build
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
