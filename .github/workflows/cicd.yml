@@ -78,6 +78,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin' # https://github.com/actions/setup-java
 
+      # Replace placeholders in application.yml with secrets
+      - name: Configure Application YML
+        run: |
+          sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/main/resources/application.yml
+          sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/main/resources/application.yml
+
       ## docker build & push
       - name: Docker build & push
         run: |
