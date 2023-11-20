@@ -31,10 +31,10 @@ jobs:
             ${{ runner.os }}-gradle-
 
       # Replace placeholders in application.yml with secrets
-      - name: Configure Application YML
-        run: |
-          sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/main/resources/application.yml
-          sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/main/resources/application.yml
+#      - name: Configure Application YML
+#        run: |
+#          sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/main/resources/application.yml
+#          sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/main/resources/application.yml
 
       ## gradle build
       - name: Build with Gradle
@@ -65,10 +65,10 @@ jobs:
             ${{ runner.os }}-gradle-
 
       # Replace placeholders in application.yml with secrets
-      - name: Configure Application YML
-        run: |
-          sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/test/resources/application.yml
-          sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/test/resources/application.yml
+#      - name: Configure Application YML
+#        run: |
+#          sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/test/resources/application.yml
+#          sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/test/resources/application.yml
 
 #      - name: Setup MySQL
 #        uses: samin/mysql-action@v1
@@ -107,10 +107,10 @@ jobs:
             ${{ runner.os }}-gradle-
 
       # Replace placeholders in application.yml with secrets
-      - name: Configure Application YML
-        run: |
-          sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/main/resources/application.yml
-          sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/main/resources/application.yml
+#      - name: Configure Application YML
+#        run: |
+#          sed -i "s|${{ secrets.DB_URL }}|${DB_URL}|g" src/main/resources/application.yml
+#          sed -i "s|${{ secrets.DB_PASSWORD }}|${DB_PASSWORD}|g" src/main/resources/application.yml
 
       ## gradle build
       - name: Build with Gradle
