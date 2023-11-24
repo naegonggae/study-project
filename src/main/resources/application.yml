@@ -19,6 +19,14 @@ spring:
         format_sql: true
         default_batch_fetch_size: 100
 #        use_sql_comments: true # show jpql in console
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: d797d57804daa1ce3857
+            client-secret: ${client-secret}
+            scope: user:email
 logging:
   level:
     org.hibernate.SQL: debug
